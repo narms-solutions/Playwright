@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button click counter</title>
+    <style>
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 50px;
+            text-align: center;
+         }
+         .button-style{
+            font-size: 16px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: blue;
+            color: aliceblue;
+            
+            }
+
+         .counter-style{
+            font-size: 16px;
+            margin-top: 50px;
+
+         }
+    </style>
+</head>
+    <button id="clickbutton" class="button-style" data-action="increament" role="button">CLICK ME</button>
+    <div id="counter" class="counter-style" data-counter="number">0</div>
+    <script>
+        let count=0;
+        let button=document.getElementById("clickbutton");
+        let counter=document.getElementById("counter");
+        button.onclick= function(){
+            count++
+            counter.innerText=count;
+
+        }
+    </script>
+<body>
+    
+</body>
+</html>
