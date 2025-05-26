@@ -1,70 +1,59 @@
-import {test, expect} from '@playwright/test'
-import{chromium} from 'playwright'
-import { Console } from 'console';
-import { read } from 'fs';
-import { endianness } from 'os';
-
-
+import { test, expect, chromium } from '@playwright/test';
 
 let browser;
 let context;
 let page;
-test.describe('Learning all the elements in Playwright',()=>{
-test.beforeAll('Launch the chrome browser',async()=>{
-    browser=await chromium.launch({headless:false})
-    console.log("bEFORE ALL HOOK LUANCHED THE CHROMIUM BROWSER");
 
-})
-test.beforeEach('Opens a new context and new page',async()=>{
-    context=await browser.newContext();
-    page=await context.newPage();
-   await  page.goto('https://letcode.in/test');
-    console.log('BEFORE EACH HOOK OENS A NEW PAGE IN THE CROMIUM BROWSER')
-})
-test.afterEach('Close the page and context', async()=>{
+test.describe('Learning all the elements in Playwright', () => {
+  test.beforeAll('Launch the chrome browser', async () => {
+    browser = await chromium.launch({ headless: false });
+    console.log('BEFORE ALL HOOK LAUNCHED THE CHROMIUM BROWSER');
+  });
+
+  test.beforeEach('Opens a new context and new page', async () => {
+    context = await browser.newContext();
+    page = await context.newPage();
+    await page.goto('https://letcode.in/test');
+    console.log('BEFORE EACH HOOK OPENS A NEW PAGE IN THE CHROMIUM BROWSER');
+  });
+
+  test.afterEach('Close the page and context', async () => {
     await page.close();
-    await  context.close();
-    await console.log('AFTER EACH HOOK CLOSED THE CURRENT PAGE AND CONTEXT')
-})
-test.afterAll('Close the browser' ,async()=>{
+    await context.close();
+    console.log('AFTER EACH HOOK CLOSED THE CURRENT PAGE AND CONTEXT');
+  });
+
+  test.afterAll('Close the browser', async () => {
     await browser.close();
-    console.log('AFTER ALL HOOK CLOSED THE CHROMIUM BROWSER')
-})
+    console.log('AFTER ALL HOOK CLOSED THE CHROMIUM BROWSER');
+  });
 
-test('Input element handling', async()=>{
-    
-    await page.getByRole('link',{name:'Edit'}).click();
-    //await page.click('text="Edit"');
-    //await page.pause();
+  test('Input element handling', async () => {
+    await page.getByRole('link', { name: 'Edit' }).click();
 
-    //Enter text in the input field
-    await page.type('#fullName', 'Narmada Nalubolu');//Types the text without erasing the exsisting text
-   // await page.fill('#fullName', 'Narmada Nalubolu'); //Clears the already exsisting text and fill the given text7
-    
-    //Append a text to the end of the exsisting text
-    const appendText= await page.$('#join');
-    await appendText.focus(); //Keeps the focu on the element
-    await page.keyboard.press("End"); //In order to append the text at he end of the text , we need to press the END button from the keyboard
-    await appendText.type(' Narmada'); //Here type method types the text at the end of the exsisting text
- 
-    //get the exsisting text
-    const getMeText=await page.getAttribute('#getMe','value');
-    console.log(`The text form the getme field:${getMeText}`);
-    await page.pause();
+    // Enter text in the input field
+    await page.type('#fullName', 'Narmada Nalubolu');
 
-    //clear the text from the input foeld
-    await page.fill('#clearMe','');
+    // Append text at the end
+    const appendText = await page.$('#join');
+    await appendText.focus();
+    await page.keyboard.press('End');
+    await appendText.type(' Narmada');
 
-    //Check the input field is disabled
-    const isDisable=await page.isDisabled('#noEdit');
-    expect(isDisable).toBe(true);
+    // Get existing text
+    const getMeText = await page.getAttribute('#getMe', 'value');
+    console.log(`The text from the getMe field: ${getMeText}`);
 
-    //Check if the inout field is readonly
-    const readOnlyTextFiled= await page.getAttribute('#dontwrite', 'readonly')!==null;
-    console.log(`This input fiels is readonly: ${readOnlyTextFiled}`);
-    expect(readOnlyTextFiled).toBe(true);
-   
-})
+    // Clear text
+    await page.fill('#clearMe', '');
 
+    // Check if disabled
+    const isDisabled = await page.isDisabled('#noEdit');
+    expect(isDisabled).toBe(true);
 
-})
+    // Check if readonly
+    const isReadOnly = (await page.getAttribute('#dontwrite', 'readonly')) !== null;
+    console.log(`This input field is readonly: ${isReadOnly}`);
+    expect(isReadOnly).toBe(true);
+  });
+});
