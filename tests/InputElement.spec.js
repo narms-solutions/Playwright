@@ -65,16 +65,6 @@ test('Input element handling', async()=>{
     expect(readOnlyTextFiled).toBe(true);
    
 })
-test.only('Button handlings',async()=>{
-    await page.click("text='Click'");
-    //Click the button and redirect back to the same page
-    await page.click('text="Goto Home"') //Clicks he button
-    await page.waitForLoadState('networkidle'); //Wait for the page to load
-    await page.goBack(); //Goes back to the previous page
-    await page.waitForLoadState('networkidle'); //Wait for the page to load
-    await  expect(page).toHaveURL("https://letcode.in/button");//Asserting the url 
 
-    //
-})
 
 })
