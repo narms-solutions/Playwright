@@ -8,9 +8,17 @@ test.describe('POM expample test',()=>{
      pm =new pomManager(page);
     })
     test('Different types of edit test', async()=>{
-        // await pm.inputelements.navigate();
-        // await pm.inputelements.editElements('Narmada Nalubolu');
+        await pm.inputelements.navigate();
+        await pm.inputelements.editElements('Narmada Nalubolu');
+      
+    })
+    test('button Hndling', async()=>{
         await pm.button.navigate();
-        await pm.button.buttonHandling();
+        await pm.button.gotoHomeAndReturn();
+        await pm.button.verifyButtonLocation();
+        await pm.button.verifyButtonColor();
+        await pm.button.verifySize();
+        await pm.button.verifyButtonDisabled();
+        await pm.button.verifyLongPress();
     })
 })
