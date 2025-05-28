@@ -7,11 +7,15 @@ test.describe('POM expample test',()=>{
     test.beforeEach('Naviagete to the page', async({page})=>{
      pm =new pomManager(page);
     })
-    test('Different types of edit test', async()=>{
-        await pm.inputelements.navigate();
-        await pm.inputelements.editElements('Narmada Nalubolu');
-      
-    })
+    test.only('Different types of edit test', async()=>{
+        await pm.inputElement.navigate();
+        await pm.inputElement.enterFullName('Narmada Nalubolu');
+        await pm.inputElement.verifyAppendText();
+        await pm.inputElement.getexsistingText();
+        await pm.inputElement.clearText();
+        await pm.inputElement.verifyDisabled();
+        await pm.inputElement.verifyReadonly();
+       })
     test('button Hndling', async()=>{
         await pm.button.navigate();
         await pm.button.gotoHomeAndReturn();
