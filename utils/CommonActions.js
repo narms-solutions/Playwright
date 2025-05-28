@@ -1,3 +1,5 @@
+import { error } from "console";
+
 export default class CommonActions{
 
     constructor(page){
@@ -18,7 +20,7 @@ export default class CommonActions{
         await this.page.fill(selector, text)
      }
      async getText(selector){
-        return await this.page.getContent(selector);
+        return await this.page.textContent(selector);
      }
      async isDisabled(selector){
         return this.page.isDisabled(selector)
@@ -59,8 +61,25 @@ export default class CommonActions{
       await this.page.click(selector, {delay:2000})
      }
 
-   async getContent(selector) {
-    const locator = this.page.locator(selector);
-    return await locator.textContent();
-}
+     async dragAndDrop(){
+      await this.page.pause();
+      // const source=await this.page.locator('#sample-box');
+      // const target =await this.page.locator('.example-boundary');
+      const source=await this.getBoundingBox('#sample-box')
+      const target =await this.getBoundingBox('.example-boundary')
+      if(source && target){
+        
+        await this.page.mouse.move(source.x+source.width/2, source.y+source.height/2)
+        await this.page.mouse.down();
+        await this.page.mouse.move(target.x+target.width/2, target.y+target.height/2,{ steps: 10 })
+        await this.page.mouse.up();
+      }
+      else{
+         throw new Error('Could not locate drag or drop element')
+      }
+
+
+     }
+
+
 }

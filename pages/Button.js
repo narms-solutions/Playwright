@@ -48,10 +48,12 @@ export default class Button {
 
     async verifyLongPress() {
         await this.actions.longPress('h2');
-        const longPressText = await this.actions.getContent('h2')
-
-        expect(longPressText.trim()).toBe('Button has been long pressed')
-
-
+        return await this.actions.getText('h2');
+    
+      
+    }
+    async assertLongPressedText(LongMessage){
+     const longPressText=await this.verifyLongPress();
+     expect(longPressText.trim()).toBe(LongMessage)
     }
 }

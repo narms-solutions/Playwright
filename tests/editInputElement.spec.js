@@ -7,7 +7,10 @@ test.describe('POM expample test',()=>{
     test.beforeEach('Naviagete to the page', async({page})=>{
      pm =new pomManager(page);
     })
-    test.only('Different types of edit test', async()=>{
+    test.afterEach('Close the browser',async({page})=>{
+        await page.close();
+    })
+    test('Different types of edit test', async()=>{
         await pm.inputElement.navigate();
         await pm.inputElement.enterFullName('Narmada Nalubolu');
         await pm.inputElement.verifyAppendText();
@@ -23,6 +26,10 @@ test.describe('POM expample test',()=>{
         await pm.button.verifyButtonColor();
         await pm.button.verifySize();
         await pm.button.verifyButtonDisabled();
-        await pm.button.verifyLongPress();
+        await pm.button.assertLongPressedText('Button has been long pressed');
+    })
+    test.only('Drag and Drop test',async()=>{
+        await pm.drag.navigate();
+        await pm.drag.dragAndDrop();
     })
 })
