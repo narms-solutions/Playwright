@@ -1,6 +1,5 @@
-import{test,expect} from '@playwright/test'
-import pomManager from '../pages/pomManager.js'
-
+import{test,expect} from '@playwright/test';
+import pomManager from '../pages/pomManager.js';
 let pm;
 
 test.describe('POM expample test',()=>{
@@ -28,8 +27,20 @@ test.describe('POM expample test',()=>{
         await pm.button.verifyButtonDisabled();
         await pm.button.assertLongPressedText('Button has been long pressed');
     })
-    test.only('Drag and Drop test',async()=>{
+    test('Drag and Drop test',async()=>{
         await pm.drag.navigate();
         await pm.drag.dragAndDrop();
+        await pm.drag.navigateDroppable();
+        await pm.drag.dragAndDropintoFrame();
+    })
+    test.only('Drop down test', async()=>{
+        await pm.dropdown.navigate();
+        await pm.dropdown.selectUsingText();
+        await pm.dropdown.selectUsingValue();
+        await pm.dropdown.selectmangoOptionFromALL();
+        await pm.dropdown.selectMultipleOtionsFromDropDown();
+        await pm.dropdown.selectLastOption();
+        await pm.dropdown.validateSelectedText();
+
     })
 })
