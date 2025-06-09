@@ -7,9 +7,11 @@ export default class CommonActions{
      }
 
      async navigate(url){
-        await this.page.goto(url)
+        await this.page.goto(`https://letcode.in/${url}`)
      }
-
+     async wait(){
+      await this.page.pause();
+     }
      async click(selector){
         await this.page.click(selector);
      }
@@ -29,7 +31,7 @@ export default class CommonActions{
         await this.page.keyboard.press('End');
      }
      async locator(selector){
-        await this.page.locator(selector);
+        return this.page.locator(selector);
      }
      async focus(selector){
         await this.page.locator(selector).focus();
@@ -61,12 +63,9 @@ export default class CommonActions{
       await this.page.click(selector, {delay:2000})
      }
 
-     async dragAndDrop(){
-      await this.page.pause();
-      // const source=await this.page.locator('#sample-box');
-      // const target =await this.page.locator('.example-boundary');
-      const source=await this.getBoundingBox('#sample-box')
-      const target =await this.getBoundingBox('.example-boundary')
+     async dragAndDrop(src,trg){
+      const source=await this.getBoundingBox(src)
+      const target =await this.getBoundingBox(trg)
       if(source && target){
         
         await this.page.mouse.move(source.x+source.width/2, source.y+source.height/2)
@@ -77,9 +76,29 @@ export default class CommonActions{
       else{
          throw new Error('Could not locate drag or drop element')
       }
+    }
+    async selectOptionUsingText(id, text){
 
+     await this.page.selectOption(`#${id}` , {label:text})
+    }
+    async selectOptionUsingValue(id,value){
+      await this.page.selectOption(`#${id}`, {value:value})
+    }
+    async selectMultipleOptions(selector, optionsArray){
+      await this.page.selectOption(selector, optionsArray)
+    }
 
-     }
+    async selectLastoption(selector,value){
+      await this.page.selectOption(selector, value)
 
+    }
+   async selectalloption(selector){
+   await this.page.$$(selector);
+   }
+
+   async getSelectedValuetext(selector){
+      await this.page.$eval(selector,e=>e.value )
+   }
+  
 
 }

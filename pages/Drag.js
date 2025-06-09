@@ -7,7 +7,15 @@ export default class Drag{
    async navigate(){
     await this.actions.navigate('https://letcode.in/draggable')
    }
+      
     async dragAndDrop(){
-        await this.actions.dragAndDrop();
+        await this.actions.dragAndDrop('#sample-box','.example-boundary');
+    }
+    async navigateDroppable(){
+        await this.actions.navigate('https://letcode.in/droppable')
+    }
+    async dragAndDropintoFrame(){
+      await this.actions.wait();
+      await this.actions.dragAndDrop('#draggable','#droppable')
     }
 }
