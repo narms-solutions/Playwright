@@ -2,9 +2,9 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [ main,Pom2 ]
+    branches: [ main,DropDownBrnach ]
   pull_request:
-    branches: [ main, Pom2 ]
+    branches: [ main, DropDownBrnach ]
 
 jobs:
   test:
