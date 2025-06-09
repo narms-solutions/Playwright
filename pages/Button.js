@@ -7,7 +7,7 @@ export default class Button {
     }
 
     async navigate() {
-        await this.actions.navigate('https://letcode.in/button')
+        await this.actions.navigate('button')
     }
     async gotoHomeAndReturn() {
         //Goto Home and come back here using driver commanda

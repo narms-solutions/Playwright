@@ -6,7 +6,7 @@ export default class InputElements {
         this.actions = new CommonActions(page);
     }
     async navigate() {
-        await this.actions.navigate('https://letcode.in/edit');
+        await this.actions.navigate('edit');
     }
 
     async enterFullName(username) {

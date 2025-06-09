@@ -5,7 +5,7 @@ export default class Drag{
         this.actions=new CommonActions(page);
     }
    async navigate(){
-    await this.actions.navigate('https://letcode.in/draggable')
+    await this.actions.navigate('draggable')
    }
       
     async dragAndDrop(){
