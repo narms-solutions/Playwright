@@ -97,7 +97,11 @@ export default class CommonActions{
    }
 
    async getSelectedValuetext(selector){
-      await this.page.$eval(selector,e=>e.value )
+      return await this.page.$eval(selector,e=>e.value )
+   }
+   async getSelectedVisualText(selector){
+      return await this.page.$eval(`${selector} option:checked`,
+    option => option.textContent.trim())
    }
   
 

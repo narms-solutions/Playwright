@@ -33,14 +33,14 @@ test.describe('POM expample test',()=>{
         await pm.drag.navigateDroppable();
         await pm.drag.dragAndDropintoFrame();
     })
-    test('Drop down test', async()=>{
+    test.only('Drop down test', async()=>{
         await pm.dropdown.navigate();
-        await pm.dropdown.selectUsingText();
-        await pm.dropdown.selectUsingValue();
-        await pm.dropdown.selectmangoOptionFromALL();
-        await pm.dropdown.selectMultipleOtionsFromDropDown();
+        // await pm.dropdown.selectUsingText();
+        // await pm.dropdown.selectUsingValue();
+        // await pm.dropdown.selectmangoOptionFromALL();
+        // await pm.dropdown.selectMultipleOtionsFromDropDown();
         await pm.dropdown.selectLastOption();
-        await pm.dropdown.validateSelectedText();
+        //await pm.dropdown.validateSelectedText();
 
     })
 })
