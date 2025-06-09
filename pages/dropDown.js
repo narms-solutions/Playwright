@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import CommonActions from '../utils/CommonActions';
 
-export default class dropDown {
+export default class DropDown {
     constructor(page) {
         this.actions = new CommonActions(page);
     }

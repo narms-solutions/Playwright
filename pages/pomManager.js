@@ -1,7 +1,7 @@
 import InputElements from '../pages/InputElements.js'
 import Button from '../pages/Button.js';
 import Drag from '../pages/Drag.js';
-import dropDown from '../pages/dropDown.js';
+import DropDown from '../pages/dropDown.js'
 
 export default class pomManager{
     constructor(page){
@@ -9,6 +9,6 @@ export default class pomManager{
         this.inputElement=new InputElements(page);
         this.button=new Button(page)
         this.drag=new Drag(page);
-        this.dropdown=new dropDown(page);
+        this.dropdown=new DropDown(page);
     }
 }
