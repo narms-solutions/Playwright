@@ -33,7 +33,7 @@ test.describe('POM expample test',()=>{
         await pm.drag.navigateDroppable();
         await pm.drag.dragAndDropintoFrame();
     })
-    test.only('Drop down test', async()=>{
+    test('Drop down test', async()=>{
         await pm.dropdown.navigate();
         await pm.dropdown.selectUsingText();
         await pm.dropdown.selectUsingValue();
