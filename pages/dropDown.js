@@ -49,23 +49,28 @@ export default class dropDown {
 
     }
 async selectLastOption() {
-        const options = await this.actions.locator('#lang');
+        const options = await this.actions.locator('#lang option');
         const count = await options.count();
+        console.log(count)
         for (let i = 0; i < count; i++) {
             const option = await options.nth(i);
             const text = (await option.textContent()).trim();
-            const value = await option.getAttribute('value');
+            const LastValue = await option.getAttribute('value');
              console.log(text);
 
             if (i === count - 1) {
-
-                await this.actions.selectLastoption('#lang', valrue);
+                await this.actions.selectLastoption('#lang', LastValue);
+               const selectedOption= await this.actions.getSelectedValuetext('#lang');
+               const selectedVisualLang=await this.actions.getSelectedVisualText('#lang')
+               console.log(`selected Option Visual text: ${selectedVisualLang}, value: ${selectedOption}`);
+               
             }
         }
     }
 async validateSelectedText() {
         await this.actions.selectLastoption('#country', 'India');
-        await this.actions.getSelectedValuetext('#country')
+       const text= await this.actions.getSelectedValuetext('#country');
+       console.log(text);
 
     }
 }
