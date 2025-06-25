@@ -6,9 +6,9 @@ test.describe('POM expample test',()=>{
     test.beforeEach('Naviagete to the page', async({page})=>{
      pm =new pomManager(page);
     })
-    test.afterEach('Close the browser',async({page})=>{
-        await page.close();
-    })
+    // test.afterEach('Close the browser',async({page})=>{
+    //     await page.close();
+    // })
     test('Different types of edit test', async()=>{
         await pm.inputElement.navigate();
         await pm.inputElement.enterFullName('Narmada Nalubolu');
@@ -41,6 +41,12 @@ test.describe('POM expample test',()=>{
         await pm.dropdown.selectMultipleOtionsFromDropDown();
         await pm.dropdown.selectLastOption();
         await pm.dropdown.validateSelectedText();
-
+    })
+    test.only('Alert test', async()=>{
+        await pm.alert.navigate();
+        //await pm.alert.acceptAlertButton();
+        //await pm.alert.dismissAlertButton();
+        //await pm.alert.inputAlertDialog();
+        await pm.alert.sweetAlert();
     })
 })

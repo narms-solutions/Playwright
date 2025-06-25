@@ -1,4 +1,5 @@
 import { error } from "console";
+import { runInThisContext } from "vm";
 
 export default class CommonActions{
 
@@ -31,7 +32,7 @@ export default class CommonActions{
         await this.page.keyboard.press('End');
      }
      async locator(selector){
-        return this.page.locator(selector);
+        await this.page.locator(selector);
      }
      async focus(selector){
         await this.page.locator(selector).focus();
@@ -103,6 +104,33 @@ export default class CommonActions{
       return await this.page.$eval(`${selector} option:checked`,
     option => option.textContent.trim())
    }
-  
+   async acceptAlertDialog() {
+      await this.page.once('dialog',async dialog=>{
+         console.log('Alert Message:',dialog.message());
+         await dialog.accept();
+      })
+      
+   }
+   async dismissAlertDialog(){
+      await this.page.once('dialog', async dialog=>{
+         console.log('Dismiss Alert dialog:',dialog.message());
+         await dialog.dismiss();
+      })
+   }
+   async inputAlertDialog(text){
+      await this.page.on('dialog', async (dialog)=>{
+         console.log('Input alert dialog:', dialog.message());
+         console.log('Dialog type:',dialog.type());
+         console.log('Dialog default value', dialog.defaultValue());
+         await dialog.accept(text);
+      })
+   }
+  async innerText(selector){
+   return await this.page.innerText(selector);
+  }
+
+  async waitForSelector(selector){
+   await this.page.waitForSelector(selector, {sate:'visible'});
+  }
 
 }
